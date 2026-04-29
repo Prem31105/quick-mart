@@ -1,0 +1,902 @@
+/* ═══════════════════════════════════════════
+   RAZORPAY SIMULATED MODAL
+   ═══════════════════════════════════════════ */
+
+/* Overlay */
+.rzp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rzpFadeIn 0.25s ease;
+}
+
+@keyframes rzpFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Container */
+.rzp-modal {
+  width: 420px;
+  max-height: 92vh;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: rzpSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  color: #1b1b2f;
+}
+
+@keyframes rzpSlideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Header ─── */
+.rzp-header {
+  background: linear-gradient(135deg, #2b3a67, #1a2744);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rzp-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rzp-merchant-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: -0.03em;
+}
+
+.rzp-merchant-name {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.rzp-amount {
+  color: white;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.rzp-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.rzp-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* ─── Customer Bar ─── */
+.rzp-customer-bar {
+  background: #f0f1f5;
+  padding: 0.45rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ─── Body ─── */
+.rzp-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+/* ─── Tabs ─── */
+.rzp-tabs {
+  display: flex;
+  border-bottom: 2px solid #e5e7eb;
+  background: #fafafa;
+}
+
+.rzp-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0.7rem 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #9ca3af;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rzp-tab:hover {
+  color: #6366f1;
+}
+
+.rzp-tab.active {
+  color: #6366f1;
+}
+
+.rzp-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #6366f1;
+  border-radius: 2px 2px 0 0;
+}
+
+/* ─── Tab Content ─── */
+.rzp-tab-content {
+  padding: 1.25rem;
+}
+
+/* ─── Net Banking ─── */
+.rzp-section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rzp-bank-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.rzp-bank-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.25rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+}
+
+.rzp-bank-card:hover {
+  border-color: #6366f1;
+  background: #f5f3ff;
+}
+
+.rzp-bank-card.selected {
+  border-color: #6366f1;
+  background: #ede9fe;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.rzp-bank-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.rzp-bank-name {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.rzp-selected-bank-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+/* ─── Pay Button ─── */
+.rzp-pay-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.rzp-pay-btn:hover:not(:disabled) {
+  background: #4f46e5;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.rzp-pay-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* ─── Other Methods (UPI, Cards, Wallet) ─── */
+.rzp-other-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.rzp-other-icon {
+  color: #9ca3af;
+  margin-bottom: 0.75rem;
+}
+
+.rzp-other-method p {
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.rzp-upi-input-wrap {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.rzp-upi-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border 0.2s;
+  box-sizing: border-box;
+}
+
+.rzp-upi-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.rzp-coming-soon {
+  font-size: 0.72rem !important;
+  color: #9ca3af !important;
+  font-style: italic;
+  margin-top: 0.5rem !important;
+}
+
+.rzp-wallet-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rzp-wallet-item {
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.rzp-wallet-item:hover {
+  border-color: #6366f1;
+  background: #f5f3ff;
+}
+
+/* ═══════════════════════════════════════════
+   BANK LOGIN PAGE
+   ═══════════════════════════════════════════ */
+
+.rzp-bank-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.rzp-bank-page-header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+}
+
+.rzp-bank-back {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.rzp-bank-back:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.rzp-bank-logo-big {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: white;
+}
+
+.rzp-bank-header-info h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.rzp-bank-header-info span {
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+
+.rzp-bank-page-body {
+  padding: 1.25rem;
+}
+
+/* Transaction Info */
+.rzp-bank-txn-info {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.rzp-txn-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  font-size: 0.78rem;
+}
+
+.rzp-txn-row span {
+  color: #6b7280;
+}
+
+.rzp-txn-row strong {
+  color: #1b1b2f;
+}
+
+.rzp-txn-amount {
+  color: #059669 !important;
+  font-size: 0.85rem;
+}
+
+/* Bank Form */
+.rzp-bank-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rzp-bank-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.rzp-bank-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.rzp-bank-field input {
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s;
+  font-family: inherit;
+  background: white;
+  color: #1b1b2f;
+}
+
+.rzp-bank-field input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.rzp-pass-wrap {
+  position: relative;
+}
+
+.rzp-pass-wrap input {
+  width: 100%;
+  padding-right: 2.5rem;
+  box-sizing: border-box;
+}
+
+.rzp-pass-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.rzp-pass-toggle:hover {
+  color: #6366f1;
+}
+
+.rzp-bank-secure {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  color: #059669;
+  padding: 0.5rem 0;
+}
+
+.rzp-bank-login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rzp-bank-login-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.rzp-bank-login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════
+   OTP PAGE
+   ═══════════════════════════════════════════ */
+
+.rzp-otp-body {
+  padding: 1.25rem;
+}
+
+.rzp-otp-message {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.rzp-otp-shield {
+  color: #2563eb;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rzp-otp-message h4 {
+  margin: 0 0 0.2rem;
+  font-size: 0.85rem;
+  color: #1e40af;
+}
+
+.rzp-otp-message p {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #3b82f6;
+  line-height: 1.4;
+}
+
+.rzp-otp-amount-confirm {
+  text-align: center;
+  padding: 0.7rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #166534;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.rzp-otp-amount-confirm strong {
+  font-size: 1.05rem;
+  color: #15803d;
+}
+
+.rzp-otp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rzp-otp-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  align-self: flex-start;
+}
+
+.rzp-otp-boxes {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rzp-otp-box {
+  width: 44px;
+  height: 52px;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s;
+  color: #1b1b2f;
+  background: white;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.rzp-otp-box:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background: #f5f3ff;
+}
+
+.rzp-otp-timer {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.rzp-resend-btn {
+  background: none;
+  border: none;
+  color: #6366f1;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.78rem;
+  text-decoration: underline;
+}
+
+.rzp-otp-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  color: #dc2626;
+  margin-top: 1rem;
+  padding: 0.5rem 0.8rem;
+  background: #fef2f2;
+  border-radius: 6px;
+  border: 1px solid #fecaca;
+}
+
+/* ═══════════════════════════════════════════
+   PROCESSING PAGE
+   ═══════════════════════════════════════════ */
+
+.rzp-processing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.rzp-processing-spinner {
+  margin-bottom: 1.5rem;
+}
+
+.rzp-spinner-icon {
+  color: #6366f1;
+  animation: rzpSpin 1s linear infinite;
+}
+
+@keyframes rzpSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.rzp-processing h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  color: #1b1b2f;
+}
+
+.rzp-processing-text {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  min-height: 1.2em;
+  transition: opacity 0.3s;
+}
+
+.rzp-processing-bar {
+  width: 100%;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.rzp-processing-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #a78bfa, #6366f1);
+  background-size: 200% 100%;
+  animation: rzpBarAnim 1.5s ease-in-out infinite;
+  width: 100%;
+}
+
+@keyframes rzpBarAnim {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.rzp-processing-warn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   RESULT PAGE
+   ═══════════════════════════════════════════ */
+
+.rzp-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.rzp-result-icon {
+  margin-bottom: 1rem;
+}
+
+.rzp-result-success {
+  color: #059669;
+  animation: rzpBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rzp-result-failure {
+  color: #dc2626;
+  animation: rzpBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes rzpBounce {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.rzp-result-title {
+  font-size: 1.2rem;
+  margin: 0 0 0.3rem;
+}
+
+.rzp-success-color { color: #059669; }
+.rzp-failure-color { color: #dc2626; }
+
+.rzp-result-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1b1b2f;
+  margin: 0.25rem 0 1rem;
+}
+
+.rzp-result-sub {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+.rzp-result-details {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.rzp-result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-size: 0.78rem;
+}
+
+.rzp-result-row span {
+  color: #6b7280;
+}
+
+.rzp-result-row strong {
+  color: #1b1b2f;
+  text-align: right;
+  max-width: 60%;
+  word-break: break-all;
+}
+
+.rzp-result-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.rzp-result-btn-success {
+  background: #059669;
+  color: white;
+}
+
+.rzp-result-btn-success:hover {
+  background: #047857;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4);
+}
+
+.rzp-result-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.rzp-result-btn-retry {
+  background: #6366f1;
+  color: white;
+}
+
+.rzp-result-btn-retry:hover {
+  background: #4f46e5;
+}
+
+.rzp-result-btn-close {
+  background: transparent;
+  color: #6b7280;
+  border: 1.5px solid #d1d5db;
+}
+
+.rzp-result-btn-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* ─── Footer ─── */
+.rzp-footer {
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.6rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  color: #9ca3af;
+}
+
+.rzp-footer strong {
+  color: #6366f1;
+  font-weight: 700;
+}
+
+.rzp-footer-sep {
+  color: #d1d5db;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .rzp-modal {
+    width: 95vw;
+    max-height: 95vh;
+  }
+
+  .rzp-bank-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .rzp-otp-box {
+    width: 38px;
+    height: 46px;
+    font-size: 1.1rem;
+  }
+}

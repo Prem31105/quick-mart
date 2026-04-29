@@ -1,0 +1,218 @@
+.navbar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  border-radius: 100px; /* Pill shape */
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.brand-icon {
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-link.active {
+  color: white;
+  background: var(--primary);
+  box-shadow: 0 4px 15px rgba(67, 56, 202, 0.4);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon-btn {
+  background: transparent;
+  color: var(--text-main);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.cart-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--primary);
+}
+
+.cart-badge-nav {
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  background: var(--secondary);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-dark);
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none; 
+  }
+  .nav-search-bar {
+    display: none !important;
+  }
+}
+
+/* User Navbar Specifics */
+.nav-user-center {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-search-bar:focus-within {
+  background: white;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+}
+
+.nav-search-bar input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding-left: 0.5rem;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.search-icon {
+  color: var(--text-muted);
+}
+
+.notification-wrapper {
+  position: relative;
+}
+
+.notification-btn {
+  background: transparent;
+  position: relative;
+  border: none;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.notification-popover {
+  position: absolute;
+  top: 120%;
+  right: -50%;
+  width: 300px;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.notification-popover h4 {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 0.95rem;
+}
+
+.notification-popover ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.notification-popover li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.02);
+  border-radius: 8px;
+}
+
+.nav-notif-badge {
+  background: var(--danger);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  margin-left: 4px;
+  line-height: 1;
+}
+
